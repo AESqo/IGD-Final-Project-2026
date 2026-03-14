@@ -3,18 +3,24 @@ using TMPro;
 
 public class SawmillButton : MonoBehaviour
 {
-    public passiveUpgrade sawmill;
+    private passiveUpgrade sawmill;
     private TMP_Text sawText;
-    void Start()
+    private bool first_click = false;
+    void Awake()
     {
         GameObject tempObj = GameObject.Find("SawText");
         sawText = tempObj.GetComponent<TMP_Text>();
-        GameManager.Instance.resourceManager.Add("Planks", 0);
-        sawmill = new passiveUpgrade("Planks", "Logs", 0, 100, 1f);
-        StartCoroutine(sawmill.tick());
     }
 
     public void button_click() {
+        if(!first_click)
+        {
+            ResourceManager.Instance.rManage.Add(resourceType.Planks, 0);
+            sawmill = new passiveUpgrade(resourceType.Planks, resourceType.Logs, 0, 4, 100, 3f, 0);
+            first_click = true;
+            GameManager.currState = GameState.UP_Panel_Get;
+            StartCoroutine(sawmill.tick());
+        }
         sawmill.upgrade();
         sawText.text = "Sawmill\n" + sawmill.cost + " Logs";
     }
