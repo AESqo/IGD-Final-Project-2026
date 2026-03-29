@@ -15,7 +15,6 @@ public class SawmillButton : MonoBehaviour
     public void button_click() {
         if(!first_click)
         {
-            ResourceManager.Instance.rManage.Add(resourceType.Planks, 0);
             sawmill = new passiveUpgrade(resourceType.Planks, resourceType.Logs, 0, 4, 100, 3f, 0);
             first_click = true;
             GameManager.currState = GameState.UP_Panel_Get;

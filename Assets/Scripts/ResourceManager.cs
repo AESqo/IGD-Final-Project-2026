@@ -9,10 +9,16 @@ public class ResourceManager : MonoBehaviour
     public static ResourceManager Instance { get; private set; }
     public Dictionary<resourceType, double> rManage = new Dictionary<resourceType, double>();
     public GameObject lumberMult;
+    private Lumberjackgen lumberjackgen;
+    private sawmillgen sawmillgen;
+    private bool generatorsStarted = false;
     void Awake()
     {
         if (Instance == null) {Instance = this;}
         else {Destroy(gameObject);}
+
+        rManage.Add(resourceType.Logs, 0);
+        rManage.Add(resourceType.Planks, 0);
     }
 
     public void add_resource(resourceType type, resourceType costType, int amount, int needed)
@@ -20,6 +26,7 @@ public class ResourceManager : MonoBehaviour
         switch(type)
         {
             case resourceType.Logs:
+                if (lumberMult == null) break;
                 amount = (int) (amount * (1f + (lumberMult.GetComponent<LumberMult>().LumMult.tier / 2f)));
                 rManage[resourceType.Logs] += (int)amount;
                 break;
@@ -31,6 +38,18 @@ public class ResourceManager : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void StartGenerators()
+    {
+        if (generatorsStarted) return;
+        generatorsStarted = true;
+            lumberjackgen = new Lumberjackgen(0, 0, 10, 1f);
+            sawmillgen = new sawmillgen(0, 8, 100, 1f);
+            lumberjackgen.TryPurchase(out string message);
+            Debug.Log("Generator Test: " + message);
+            StartCoroutine(lumberjackgen.Tick());
+            StartCoroutine(sawmillgen.Tick());
     }
 }
 public class passiveUpgrade

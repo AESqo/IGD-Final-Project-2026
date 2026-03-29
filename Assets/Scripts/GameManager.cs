@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(ResourceManager.Instance == null) return;
+        
         GameStateUpdate();
         tempText.Clear();
         foreach (KeyValuePair<resourceType, double> dics in ResourceManager.Instance.rManage) {

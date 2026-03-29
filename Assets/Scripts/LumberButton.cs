@@ -11,7 +11,6 @@ public class LumberButton : MonoBehaviour
     {
         GameObject tempObj = GameObject.Find("LumberText");
         lumberText = tempObj.GetComponent<TMP_Text>();
-        ResourceManager.Instance.rManage.Add(resourceType.Logs, 0);
         lumberjack = new passiveUpgrade(resourceType.Logs, resourceType.Logs, 0, 1, 10, 1f, 0);
     }
 
@@ -21,6 +20,7 @@ public class LumberButton : MonoBehaviour
         {
             first_click = true;
             StartCoroutine(lumberjack.tick());
+            ResourceManager.Instance.StartGenerators();
         }
         lumberText.text = "Lumberjack\n" + lumberjack.cost + " Logs";
     }
