@@ -5,7 +5,7 @@ public class LumberMult : MonoBehaviour
 {
     public multUpgrade LumMult;
     private TMP_Text LumMultText;
-    void Start()
+    void Awake()
     {
         GameObject tempObj = GameObject.Find("LumberMultText");
         LumMultText = tempObj.GetComponent<TMP_Text>();

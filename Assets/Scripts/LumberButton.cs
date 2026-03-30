@@ -20,7 +20,7 @@ public class LumberButton : MonoBehaviour
         {
             first_click = true;
             StartCoroutine(lumberjack.tick());
-            ResourceManager.Instance.StartGenerators();
+            //ResourceManager.Instance.StartGenerators();
         }
         lumberText.text = "Lumberjack\n" + lumberjack.cost + " Logs";
     }
