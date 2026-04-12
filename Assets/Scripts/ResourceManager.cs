@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 public enum resourceType{
         Logs,
         Planks
@@ -35,6 +36,7 @@ public class ResourceManager : MonoBehaviour
         }
     }
 }
+[System.Serializable]
 public class passiveUpgrade
 {
     public resourceType type;

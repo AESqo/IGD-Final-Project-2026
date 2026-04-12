@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using System.IO;
+using System.Xml.Serialization;
 
 public class LumberButton : MonoBehaviour
 {
@@ -9,9 +11,14 @@ public class LumberButton : MonoBehaviour
     private bool first_click = false;
     void Start()
     {
+        TextAsset woodxml = Resources.Load<TextAsset>("wood");
+        XmlSerializer cereal = new XmlSerializer(typeof(passiveUpgrade));
         GameObject tempObj = GameObject.Find("LumberText");
         lumberText = tempObj.GetComponent<TMP_Text>();
-        lumberjack = new passiveUpgrade(resourceType.Logs, resourceType.Logs, 0, 1, 10, 1f, 0);
+        using (StringReader reader = new StringReader(woodxml.text)) {
+            lumberjack = cereal.Deserialize(reader) as passiveUpgrade;
+        }
+        //lumberjack = new passiveUpgrade(resourceType.Logs, resourceType.Logs, 0, 1, 10, 1f, 0);
     }
 
     public void button_click() {

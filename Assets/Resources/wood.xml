@@ -1,0 +1,9 @@
+<passiveUpgrade>
+    <type>Logs</type>
+    <costType>Logs</costType>
+    <add>0</add>
+    <boost>1</boost>
+    <cost>10</cost>
+    <timer>1</timer>
+    <timesBought>0</timesBought>
+</passiveUpgrade>
