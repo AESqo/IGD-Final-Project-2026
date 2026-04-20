@@ -1,0 +1,7 @@
+Changes made to SawmillButton
+Sawmill button used to directly change the managers state
+now it just calls a trigger method and gets left alone
+gamemanager declares a delegate as the method signature, and subcribes to the listener HANDLESAWMILLUNLOCKED
+Only Gamemanager can fire off the event
+
+The public trigger method involves gamemanager being able to invoke its own events outside of classes.
